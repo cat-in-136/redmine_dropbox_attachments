@@ -15,7 +15,7 @@ After the plugin is installed you will need to restart Redmine for the plugin to
 
 ### Compatiblity
 
-This plugin has been tested against [Redmine](http://www.redmine.org) 2.0+.   Dropbox API v2 support is supported as of f680dcdfde9faa8589942de5932e2d8754d8e0e8.
+This plugin has been tested against [Redmine](http://www.redmine.org) 2.0+.   Dropbox API v2 support is supported as of f680dcd.
 
 Though it "should" be capable of working with older (1.x) versions, no guarantees will be made ;)
 
@@ -35,7 +35,7 @@ The plugin must be configured from `Administration > Plugins > Dropbox Attachmen
 
 ### Authorization
 
-Before Redmine can store files on a shared Dropbox folder, it must be authorized. You'll need to create an app at [the Dropbox Developer portal][https://www.dropbox.com/developers], and then enter the app's key and secret in the plugin's settings page within Redmine. Make sure that you have also added _https://your app's server/dropbox/authorize_ as an OAuth2 Redirect URI in the Dropbox developer portal so that Dropbox knows it's ok to send a token back to your app. Finally, get an OAuth token by clicking _Authorize Redmine with Dropbox_ on the same plugin settings page, then selecting _Allow_ from Dropbox's authorization page.
+Before Redmine can store files on a shared Dropbox folder, it must be authorized. You'll need to create an app at [the Dropbox Developer portal](https://www.dropbox.com/developers), and then enter the app's key and secret in the plugin's settings page within Redmine. Make sure that you have also added `https://your app's base url/dropbox/authorize` as an OAuth2 Redirect URI in the Dropbox developer portal so that Dropbox knows it's ok to send a token back to your app. Finally, get an OAuth token by clicking _Authorize Redmine with Dropbox_ on the same plugin settings page, then selecting _Allow_ from Dropbox's authorization page.
 
 ### Specifying a Base Directory
 
