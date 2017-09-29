@@ -15,3 +15,4 @@ en:
   label_authorization: "Authorization"
   label_use_hierarchy: "Hierarchial Storage"
   label_about_hierarchy: "Sort attachments into folders. For example: /<Base Directory>/<Project>/<Module>/files..."
+  enter_tokens_first: "To authorize the app, you must first, enter your app token and secret from the Dropbox developer's console and click Apply.  You will then see a link here to authorize with Dropbox"
