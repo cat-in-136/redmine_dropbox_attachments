@@ -24,10 +24,10 @@ module RedmineDropbox
         # XXX redmine_dropbox_attachments 1.x compatibility
         # if the file doesn't existing in the /base/project/class/filename location, try falling back to /base/filename
         ref = begin
-          client.get_temporary_link("/#{path}")
+          client.get_temporary_link(path)
         rescue DropboxApi::Errors::NotFoundError
           p = path.split("/")
-          client.get_temporary_link(["/", p[0], p[-1]].flatten.join("/"))
+          client.get_temporary_link([p[0], p[-1]].flatten.join("/"))
         end
 
         redirect_to ref.link

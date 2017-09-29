@@ -72,7 +72,7 @@ module RedmineDropbox
         end
 
         path << fn
-        path.compact.join('/')
+        "/#{path.compact.join('/')}"
       end
     end
 
@@ -107,13 +107,13 @@ module RedmineDropbox
         end
 
         path << fn
-        path.compact.join('/')
+        "/#{path.compact.join('/')}"
       end
 
       def save_to_dropbox
         if @temp_file && (@temp_file.size > 0)
           logger.debug "[redmine_dropbox_attachments] Uploading #{dropbox_filename}"
-          Attachment.dropbox_client.upload "/#{dropbox_path}", @temp_file.is_a?(String) ? @temp_file : @temp_file.read
+          Attachment.dropbox_client.upload dropbox_path, @temp_file.is_a?(String) ? @temp_file : @temp_file.read
 
           md5 = Digest::MD5.new
           self.digest = md5.hexdigest
