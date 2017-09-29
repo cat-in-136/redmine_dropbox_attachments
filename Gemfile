@@ -1,1 +1,1 @@
-gem "dropbox-api"
+gem "dropbox_api"
