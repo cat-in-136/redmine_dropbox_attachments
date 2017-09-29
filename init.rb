@@ -1,12 +1,12 @@
 require 'redmine_dropbox'
 
 Redmine::Plugin.register :redmine_dropbox_attachments do
-  name        "Dropbox Attachment Storage"
+  name        "Dropbox Attachment Storage - API v2"
   author      "Alex Bevilacqua"
   description "Use Dropbox for attachment storage"
   url         "https://github.com/alexbevi/redmine_dropbox_attachments"
   author_url  "mailto:alexbevi@gmail.com"
-  version     "2.2.1"
+  version     "2.2.2"
 
   requires_redmine :version_or_higher => '2.0.0'
 
@@ -18,6 +18,3 @@ Redmine::Plugin.register :redmine_dropbox_attachments do
 
 end
 
-Dropbox::API::Config.app_key    = "wmofz74crudpszb"
-Dropbox::API::Config.app_secret = "20py9be64g6chf9"
-Dropbox::API::Config.mode       = "sandbox"
