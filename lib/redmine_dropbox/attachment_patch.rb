@@ -50,7 +50,7 @@ module RedmineDropbox
 
           raise l(:dropbox_not_authorized) unless (k["DROPBOX_TOKEN"] && k["DROPBOX_SECRET"])
 
-          @@dropbox_client_instance = Dropbox::API::Client.new(:token => k["DROPBOX_TOKEN"], :secret => k["DROPBOX_SECRET"])
+          @@dropbox_client_instance = DropboxApi::Client.new(k["DROPBOX_TOKEN"])
         end
 
         @@dropbox_client_instance
@@ -113,7 +113,7 @@ module RedmineDropbox
       def save_to_dropbox
         if @temp_file && (@temp_file.size > 0)
           logger.debug "[redmine_dropbox_attachments] Uploading #{dropbox_filename}"
-          Attachment.dropbox_client.upload dropbox_path, @temp_file.is_a?(String) ? @temp_file : @temp_file.read
+          Attachment.dropbox_client.upload "/#{dropbox_path}", @temp_file.is_a?(String) ? @temp_file : @temp_file.read
 
           md5 = Digest::MD5.new
           self.digest = md5.hexdigest
@@ -126,9 +126,7 @@ module RedmineDropbox
 
       def delete_from_dropbox
         logger.debug "[redmine_dropbox_attachments] Deleting #{dropbox_filename}"
-
-        f = Attachment.dropbox_client.find(dropbox_path(dropbox_filename))
-        f.destroy
+        Attachment.dropbox_client.delete(dropbox_path(dropbox_filename))
       end
     end
   end
