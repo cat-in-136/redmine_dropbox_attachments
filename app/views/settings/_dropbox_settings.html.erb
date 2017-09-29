@@ -10,18 +10,12 @@
   <br />
   <em><%= l(:label_about_hierarchy) %></em>
 </p>
-<p>
-  <label><%= l(:label_authorization) %></label>
-  <%= link_to l(:label_authorize_instance), {:controller => 'dropbox', :action => 'authorize'} %>
-  <br />
-  <em><%= l(:authorization_instructions) %></em>
-</p>
 <hr/>
 
 <p>
-  <strong><%= l(:advanced_settings) %></strong>
+  <strong><%= l(:authorization_settings) %></strong>
   <br/>
-  <em><%= l(:advanced_settings_instructions) %></em>
+  <em><%= l(:authorization_settings_instructions) %></em>
 </p>
 <p>
   <label><%=l(:label_token)%></label>
@@ -30,4 +24,14 @@
 <p>
   <label><%=l(:label_secret)%></label>
   <%= text_field_tag 'settings[DROPBOX_SECRET]', settings['DROPBOX_SECRET'] %>
+</p>
+<p>
+  <label><%= l(:label_authorization) %></label>
+  <%= link_to l(:label_authorize_instance), {:controller => 'dropbox', :action => 'authorize'} %>
+  <br />
+  <% if !settings['DROPBOX_OAUTH_TOKEN'] %>
+      <em><%= l(:authorization_instructions) %></em>
+  <% else %>
+      <em><%= l(:reauthorization_instructions) %></em>
+  <% end %>
 </p>

@@ -48,9 +48,9 @@ module RedmineDropbox
         if Attachment.dropbox_client_instance.nil?
           k = Attachment.dropbox_plugin_settings
 
-          raise l(:dropbox_not_authorized) unless (k["DROPBOX_TOKEN"] && k["DROPBOX_SECRET"])
+          raise l(:dropbox_not_authorized) unless (k["DROPBOX_OAUTH_TOKEN"])
 
-          @@dropbox_client_instance = DropboxApi::Client.new(k["DROPBOX_TOKEN"])
+          @@dropbox_client_instance = DropboxApi::Client.new(k["DROPBOX_OAUTH_TOKEN"])
         end
 
         @@dropbox_client_instance
