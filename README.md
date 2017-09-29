@@ -15,7 +15,7 @@ After the plugin is installed you will need to restart Redmine for the plugin to
 
 ### Compatiblity
 
-This plugin has been tested against [Redmine](http://www.redmine.org) 2.0+.
+This plugin has been tested against [Redmine](http://www.redmine.org) 2.0+.   Dropbox API v2 support is supported as of f680dcdfde9faa8589942de5932e2d8754d8e0e8.
 
 Though it "should" be capable of working with older (1.x) versions, no guarantees will be made ;)
 
@@ -35,7 +35,7 @@ The plugin must be configured from `Administration > Plugins > Dropbox Attachmen
 
 ### Authorization
 
-Before Redmine can store files on a shared Dropbox folder, it must be authorized. This is done by clicking _Authorize Redmine with Dropbox_, then selecting _Allow_ from Dropbox's authorization page.
+Before Redmine can store files on a shared Dropbox folder, it must be authorized. You'll need to create an app at [the Dropbox Developer portal][https://www.dropbox.com/developers], and then enter the app's key and secret in the plugin's settings page within Redmine. Make sure that you have also added _https://your app's server/dropbox/authorize_ as an OAuth2 Redirect URI in the Dropbox developer portal so that Dropbox knows it's ok to send a token back to your app. Finally, get an OAuth token by clicking _Authorize Redmine with Dropbox_ on the same plugin settings page, then selecting _Allow_ from Dropbox's authorization page.
 
 ### Specifying a Base Directory
 
@@ -91,6 +91,11 @@ when trying to delete an object (File, Issue, Document ... etc) that has an atta
 
 That version ignored the value of *Base Directory* and instead used a string value of "false". 
 Just copy the files from "false" to the desired directory.
+
+
+### Issues Upgrading from 2.2.1
+
+As of September 27, 2017, Dropbox no longer supports the v1 API that this plugin used in version 2.2.1 and prior; Dropbox's v2 API is now supported, but the authentication flow is slightly different and you will need to reauthenticate your app on the plugin settings page for everything to work.
 
 ## About
 
