@@ -10,10 +10,18 @@ module RedmineDropbox
         base.send(:include, Redmine22AndOlder)
       end
 
-      base.class_eval do
-        unloadable
-        before_filter :prepare_dropbox_redirect, :except => :destroy
-        skip_before_filter :file_readable
+      if Redmine::VERSION.to_s >= "4.0"
+        base.class_eval do
+          unloadable
+          before_action :prepare_dropbox_redirect, :except => :destroy
+          skip_before_action :file_readable
+        end
+      else
+        base.class_eval do
+          unloadable
+          before_filter :prepare_dropbox_redirect, :except => :destroy
+          skip_before_filter :file_readable
+        end
       end
     end
 
