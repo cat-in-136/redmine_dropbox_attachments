@@ -64,11 +64,18 @@ module RedmineDropbox
           # For attachments in the "File" area, we want to identify
           # as a "Project" since there technically is no "File" container
           klass = "Project" if klass == "File"
+          # For attachments in the "Topic" (Forum) area, we want to identify
+          # as a "Message" since there technically is no "Topic" container
+          klass = "Message" if klass == "Topic"
 
           # Try to match an id (regardless of whether it'll be valid)
           record  = ref[-1].to_i
           project = if record > 0
-            klass.constantize.find(record).project_id
+            if klass == "Message"
+              klass.constantize.find(record).project.id # Message does not have the member: project_id
+            else
+              klass.constantize.find(record).project_id
+            end
           else
             ref[0] # we won't have a project AND a record, so this shouldn't fail
           end
