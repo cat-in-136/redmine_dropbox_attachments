@@ -31,11 +31,13 @@ module RedmineDropbox
 
         # XXX redmine_dropbox_attachments 1.x compatibility
         # if the file doesn't existing in the /base/project/class/filename location, try falling back to /base/filename
-        ref = begin
-          client.get_temporary_link(path)
-        rescue DropboxApi::Errors::NotFoundError
-          p = path.split("/")
-          client.get_temporary_link([p[0], p[-1]].flatten.join("/"))
+        ref = Rails.cache.fetch("redmine_dropbox_attachments/#{URI.encode_www_form_component(path)}/temporary_link", expires_in: 2.hours) do
+          begin
+            client.get_temporary_link(path)
+          rescue DropboxApi::Errors::NotFoundError
+            p = path.split("/")
+            client.get_temporary_link([p[0], p[-1]].flatten.join("/"))
+          end
         end
 
         redirect_to ref.link
